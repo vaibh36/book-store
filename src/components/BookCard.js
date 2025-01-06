@@ -62,6 +62,7 @@ const BookCard = ({ book }) => {
           </Typography>
           <Stack flexDirection={"row"} alignItems={"center"}>
             <Button
+              data-testid="read__btn"
               variant="contained"
               color={book.read ? "primary" : "default"}
               onClick={() => {
@@ -75,7 +76,7 @@ const BookCard = ({ book }) => {
               {book.read ? "Mark as Unread" : "Mark as Read"}
             </Button>
             <IconButton
-              aria-label="info"
+              data-testid="info__icon"
               color="primary"
               onClick={() => {
                 setSelectedBook(book);
@@ -124,6 +125,7 @@ const BookCard = ({ book }) => {
         </DialogContent>
         <DialogActions>
           <Button
+            data-testid="close__btn"
             onClick={handleDialogClose}
             color="primary"
             variant="contained"

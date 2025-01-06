@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const booksSlice = createSlice({
+export const booksSlice = createSlice({
   name: "books",
   initialState: {
     books: [],

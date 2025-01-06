@@ -1,25 +1,19 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, MemoryRouter } from "react-router-dom";
-import BookCard from "../components/BookCard"; // Adjust the import path
-import rootReducer from "../store";
-import { configureStore } from "@reduxjs/toolkit"; // Add this import
-import thunk from "redux-thunk";
+import { MemoryRouter } from "react-router-dom";
+import BookCard from "../components/BookCard";
+
+import configureStore from "redux-mock-store";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   BrowserRouter: ({ children }) => <div>{children}</div>,
   Route: ({ children }) => <div>{children}</div>,
 }));
+const initialState = {};
 
-const store = configureStore({
-  reducer: rootReducer, // Use the actual rootReducer or a mock one
-  preloadedState: {
-    // Optionally define initial state if needed
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware,
-});
+const mockStore = configureStore([]);
 
 describe("BookCard Component", () => {
   const mockBook = {
@@ -30,9 +24,50 @@ describe("BookCard Component", () => {
     read: false,
   };
 
-  test("renders book details", () => {
-    render(<BookCard book={mockBook} />);
+  test("snapshot test case", () => {
+    const wrapper = render(
+      <Provider store={mockStore(initialState)}>
+        <MemoryRouter>
+          <BookCard book={mockBook} />
+        </MemoryRouter>
+      </Provider>
+    );
 
     expect(wrapper).toMatchSnapshot();
+  });
+  test("open dialog test", async () => {
+    render(
+      <Provider store={mockStore(initialState)}>
+        <MemoryRouter>
+          <BookCard book={mockBook} />
+        </MemoryRouter>
+      </Provider>
+    );
+    const infoIcon = await screen.findByTestId("info__icon");
+    fireEvent.click(infoIcon);
+  });
+  test("close btn click", async () => {
+    render(
+      <Provider store={mockStore(initialState)}>
+        <MemoryRouter>
+          <BookCard book={mockBook} />
+        </MemoryRouter>
+      </Provider>
+    );
+    const infoIcon = await screen.findByTestId("info__icon");
+    fireEvent.click(infoIcon);
+    const closeBtn = await screen.findByTestId("close__btn");
+    fireEvent.click(closeBtn);
+  });
+  test("read unread toggle click", async () => {
+    render(
+      <Provider store={mockStore(initialState)}>
+        <MemoryRouter>
+          <BookCard book={mockBook} />
+        </MemoryRouter>
+      </Provider>
+    );
+    const readToggler = await screen.findByTestId("read__btn");
+    fireEvent.click(readToggler);
   });
 });
