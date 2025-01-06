@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { Box, Typography, List } from "@mui/material";
 import { Grid } from "@mui/material";
-import { useDispatch } from "react-redux";
-import BookCard from "./BookCard";
+import BookCard from "../components/BookCard";
 
 const AllBooks = () => {
   const [searchParams] = useSearchParams();

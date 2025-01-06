@@ -7,7 +7,7 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
-import AllBooks from "./components/AllBooks";
+import AllBooks from "./pages/AllBooks";
 import { theme } from "../src/theme";
 import NavButtons from "./components/NavButtons";
 import "./App.css";
