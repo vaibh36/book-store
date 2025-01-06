@@ -8,6 +8,7 @@
     "@mui/icons-material": "^6.3.0",
     "@mui/material": "^6.3.0",
     "@reduxjs/toolkit": "^2.5.0",
+    "@testing-library/react": "^16.1.0",
     "cra-template": "1.2.0",
     "formik": "^2.4.6",
     "i18next": "^24.2.0",
@@ -15,14 +16,15 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
-    "react-router-dom": "^7.1.1",
+    "react-router-dom": "^6.28.1",
     "react-scripts": "5.0.1",
+    "redux-thunk": "^3.1.0",
     "yup": "^1.6.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,5 +44,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.26.3",
+    "@testing-library/jest-dom": "^6.6.3",
+    "babel-jest": "^29.7.0",
+    "jest": "^27.5.1"
   }
 }
