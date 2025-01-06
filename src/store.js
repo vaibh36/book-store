@@ -19,10 +19,19 @@ const booksSlice = createSlice({
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
+    editBook: (state, action) => {
+      const updatedBook = action.payload;
+
+      const index = state.books.findIndex((b) => b?.id === updatedBook.id);
+      if (index !== -1) {
+        state.books[index] = updatedBook;
+      }
+    },
   },
 });
 
-export const { addBook, toggleReadStatus, setFilter } = booksSlice.actions;
+export const { addBook, toggleReadStatus, setFilter, editBook } =
+  booksSlice.actions;
 
 const store = configureStore({
   reducer: {

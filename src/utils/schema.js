@@ -8,4 +8,10 @@ export const bookFormValidationSchema = Yup.object({
   price: Yup.number().required("Price is required"),
 });
 
-export const bookInitialState = { title: "", author: "", price: "" };
+export const bookInitialState = (book = {}) => {
+  return {
+    title: book?.title || "",
+    author: book?.author || "",
+    price: book?.price || "",
+  };
+};

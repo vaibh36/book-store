@@ -1,28 +1,57 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
-import { addBook } from "../store";
+import { addBook, editBook } from "../store";
 import { Box, Button, Snackbar, Alert } from "@mui/material";
 import { bookFormValidationSchema, bookInitialState } from "../utils/schema";
 import FormikTextField from "./FormikTextField";
+import { useLocation } from "react-router-dom";
+import isEmpty from "lodash.isempty";
 
-const BookForm = () => {
+const BookForm = ({ book = {} }) => {
   const dispatch = useDispatch();
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const location = useLocation();
+  const {
+    id = "",
+    title = "",
+    author = "",
+    price = "",
+  } = location?.state || {};
+
+  const initialState = {
+    author,
+    title,
+    price,
+  };
 
   const validationSchema = bookFormValidationSchema;
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(
-      addBook({
-        id: Date.now(),
-        title: values.title,
-        author: values.author,
-        read: false,
-      })
-    );
-    resetForm();
-    setOpenSnackbar(true);
+    if (isEmpty(location?.state)) {
+      dispatch(
+        addBook({
+          id: Date.now(),
+          title: values?.title,
+          author: values?.author,
+          read: false,
+          price: values?.price,
+        })
+      );
+      resetForm();
+      setOpenSnackbar(true);
+    }
+
+    if (!isEmpty(location?.state)) {
+      dispatch(
+        editBook({
+          id,
+          title: values?.title,
+          author: values?.author,
+          price: values?.price,
+        })
+      );
+    }
   };
 
   const handleCloseSnackbar = () => {
@@ -31,7 +60,8 @@ const BookForm = () => {
 
   return (
     <Formik
-      initialValues={bookInitialState}
+      enableReinitialize
+      initialValues={bookInitialState(initialState)}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
@@ -50,7 +80,7 @@ const BookForm = () => {
             <FormikTextField name="author" label="Author" />
             <FormikTextField name="price" label="Price" />
             <Button type="submit" variant="contained" color="primary">
-              Add Book
+              {isEmpty(location?.state) ? "Add Book" : "Edit Book"}
             </Button>
             <Button variant="contained" color="primary" onClick={resetForm}>
               Reset

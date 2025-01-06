@@ -16,6 +16,7 @@ import {
   useTranslationContext,
 } from "./context/TranslationContext";
 import { useSelector } from "react-redux";
+import EditPage from "./pages/EditPage";
 
 function App() {
   const { t } = useTranslationContext();
@@ -23,7 +24,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (books.books?.length === 0) {
+    if (books?.books?.length === 0) {
       navigate("/");
     }
   }, [books]);
@@ -40,6 +41,7 @@ function App() {
         <Routes>
           <Route path="/" element={<BookForm />} />
           <Route path="/books" element={<AllBooks />} />
+          <Route path="/books/:id" element={<EditPage />} />
         </Routes>
       </ThemeProvider>
     </TranslationProvider>

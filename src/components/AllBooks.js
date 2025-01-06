@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import {
@@ -8,10 +8,17 @@ import {
   ListItem,
   ListItemText,
   Button,
+  IconButton,
+  Stack,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import { Card, CardContent, Grid, Chip } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { toggleReadStatus } from "../store";
+import BookCard from "./BookCard";
 
 const AllBooks = () => {
   const [searchParams] = useSearchParams();
@@ -28,7 +35,7 @@ const AllBooks = () => {
   return (
     <Box
       sx={{
-        maxWidth: 600,
+        maxWidth: 900,
         margin: "0 auto",
         padding: "20px",
       }}
@@ -47,44 +54,18 @@ const AllBooks = () => {
           : "All Books"}
       </Typography>
       <List>
-        <Grid container spacing={3}>
+        <Grid container spacing={4}>
           {filteredBooks?.map((book) => (
-            <Grid item key={book.id} xs={12} sm={6} md={4}>
-              <Card variant="outlined">
-                <CardContent>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    noWrap
-                    sx={{
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {book.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    by {book.author}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" paragraph>
-                    {book.read ? "Read" : "Unread"}
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    color={book.read ? "primary" : "default"}
-                    onClick={() => {
-                      dispatch(toggleReadStatus(book.id));
-                    }}
-                    sx={{
-                      textTransform: "none", // Keep button text in normal case
-                      marginTop: 1,
-                    }}
-                  >
-                    {book.read ? "Mark as Unread" : "Mark as Read"}
-                  </Button>
-                </CardContent>
-              </Card>
+            <Grid
+              item
+              key={book.id}
+              xs={12}
+              sm={6}
+              md={4}
+              paddingLeft={"16px !important"}
+              id="gridder"
+            >
+              <BookCard book={book} />
             </Grid>
           ))}
         </Grid>
