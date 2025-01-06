@@ -1,30 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import {
-  Box,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  Button,
-  IconButton,
-  Stack,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from "@mui/material";
-import { Card, CardContent, Grid, Chip } from "@mui/material";
+import { Box, Typography, List } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { toggleReadStatus } from "../store";
 import BookCard from "./BookCard";
 
 const AllBooks = () => {
   const [searchParams] = useSearchParams();
   const filter = searchParams?.get("filter");
   const books = useSelector((state) => state?.books);
-  const dispatch = useDispatch();
 
   const filteredBooks = (books?.books || [])?.filter((book) => {
     if (filter === "read") return book?.read;
