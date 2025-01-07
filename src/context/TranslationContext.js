@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { translations } from "../constants/translations";
 
-const TranslationContext = createContext();
+export const TranslationContext = createContext();
 
 export const useTranslationContext = () => {
   const context = useContext(TranslationContext);

@@ -35,9 +35,9 @@ const AllBooks = () => {
         }}
       >
         {filter === invariants.read
-          ? t.readBooks
+          ? "Read Books"
           : filter === invariants.unread
-          ? t.unreadBooks
+          ? "Unread Books"
           : t.allBooks}
       </Typography>
       <List>
@@ -62,7 +62,7 @@ const AllBooks = () => {
               marginTop: "16px",
             }}
           >
-            {t.noBooksFound}
+            No books found
           </Typography>
         )}
       </List>

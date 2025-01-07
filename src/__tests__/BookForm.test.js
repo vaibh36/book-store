@@ -1,10 +1,17 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 import { createStore } from "redux";
 import BookForm from "../components/BookForm";
 import { addBook } from "../store";
+import { MockTranslationProvider } from "../context/TestTranslatationContext";
 
 jest.mock("../store", () => ({
   addBook: jest.fn(),
@@ -18,22 +25,33 @@ describe("BookForm Component", () => {
     const container = render(
       <Provider store={mockStore}>
         <MemoryRouter>
-          <BookForm />
+          <MockTranslationProvider>
+            <BookForm />
+          </MockTranslationProvider>
         </MemoryRouter>
       </Provider>
     );
 
-    fireEvent.change(screen.getByLabelText(/Book Title/i), {
+    const titleContainer = await screen.findByTestId("title");
+    const titleInput = within(titleContainer).getByRole("textbox");
+
+    fireEvent.change(titleInput, {
       target: { value: "Test Booknnnnnnnnnnnnnnnnnnnnnnnnn" },
     });
-    fireEvent.change(screen.getByLabelText(/Author/i), {
+
+    const authorContainer = await screen.findByTestId("author");
+    const authorInput = within(authorContainer).getByRole("textbox");
+    fireEvent.change(authorInput, {
       target: { value: "Test Authornnnnnnnnnnnnnnnnnn" },
     });
-    fireEvent.change(screen.getByLabelText(/Price/i), {
-      target: { value: "10" },
+
+    const priceContainer = await screen.findByTestId("price");
+    const priceInput = within(priceContainer).getByRole("textbox");
+    fireEvent.change(priceInput, {
+      target: { value: 10 },
     });
 
-    fireEvent.click(screen.getByText(/Add Book/i));
+    fireEvent.click(await screen.findByTestId("add_book"));
     console.log(container.container.innerHTML);
 
     await waitFor(() => {

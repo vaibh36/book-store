@@ -78,10 +78,27 @@ const BookForm = ({ book = {} }) => {
               margin: "0 auto",
             }}
           >
-            <FormikTextField name="title" label={t.bookTitle} />
-            <FormikTextField name="author" label={t.authLabel} />
-            <FormikTextField name="price" label={t.priceLable} />
-            <Button type="submit" variant="contained" color="primary">
+            <FormikTextField
+              name="title"
+              label={t.bookTitle}
+              data-testid="title"
+            />
+            <FormikTextField
+              name="author"
+              label={t.authLabel}
+              data-testid="author"
+            />
+            <FormikTextField
+              name="price"
+              label={t.priceLable}
+              data-testid="price"
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              data-testid="add_book"
+            >
               {isEmpty(location?.state) ? t.addBook : t.editBook}
             </Button>
             <Button variant="contained" color="primary" onClick={resetForm}>

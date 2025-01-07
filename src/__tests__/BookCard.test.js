@@ -6,6 +6,8 @@ import BookCard from "../components/BookCard";
 
 import configureStore from "redux-mock-store";
 
+import { MockTranslationProvider } from "../context/TestTranslatationContext";
+
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   BrowserRouter: ({ children }) => <div>{children}</div>,
@@ -28,7 +30,9 @@ describe("BookCard Component", () => {
     const wrapper = render(
       <Provider store={mockStore(initialState)}>
         <MemoryRouter>
-          <BookCard book={mockBook} />
+          <MockTranslationProvider>
+            <BookCard book={mockBook} />
+          </MockTranslationProvider>
         </MemoryRouter>
       </Provider>
     );
@@ -39,7 +43,9 @@ describe("BookCard Component", () => {
     render(
       <Provider store={mockStore(initialState)}>
         <MemoryRouter>
-          <BookCard book={mockBook} />
+          <MockTranslationProvider>
+            <BookCard book={mockBook} />
+          </MockTranslationProvider>
         </MemoryRouter>
       </Provider>
     );
@@ -50,7 +56,9 @@ describe("BookCard Component", () => {
     render(
       <Provider store={mockStore(initialState)}>
         <MemoryRouter>
-          <BookCard book={mockBook} />
+          <MockTranslationProvider>
+            <BookCard book={mockBook} />
+          </MockTranslationProvider>
         </MemoryRouter>
       </Provider>
     );
@@ -63,7 +71,9 @@ describe("BookCard Component", () => {
     render(
       <Provider store={mockStore(initialState)}>
         <MemoryRouter>
-          <BookCard book={mockBook} />
+          <MockTranslationProvider>
+            <BookCard book={mockBook} />
+          </MockTranslationProvider>
         </MemoryRouter>
       </Provider>
     );

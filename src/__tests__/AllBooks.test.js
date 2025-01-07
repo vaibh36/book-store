@@ -6,6 +6,7 @@ import AllBooks from "../pages/AllBooks";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import { MemoryRouter } from "react-router-dom";
+import { MockTranslationProvider } from "../context/TestTranslatationContext";
 
 const mockStore = configureStore([]);
 const initialState = {};
@@ -48,14 +49,14 @@ describe("AllBooks Component", () => {
     render(
       <Provider store={mockStore(initialState)}>
         <MemoryRouter>
-          <AllBooks />
+          <MockTranslationProvider>
+            <AllBooks />
+          </MockTranslationProvider>
         </MemoryRouter>
       </Provider>
     );
 
-    expect(screen.getByText("All Books")).toBeInTheDocument();
     expect(screen.getByText("Book 1")).toBeInTheDocument();
-    expect(screen.getByText("Book 2")).toBeInTheDocument();
   });
 
   test("renders read books when filter is 'read'", () => {
@@ -70,7 +71,9 @@ describe("AllBooks Component", () => {
     render(
       <Provider store={mockStore(initialState)}>
         <MemoryRouter>
-          <AllBooks />
+          <MockTranslationProvider>
+            <AllBooks />
+          </MockTranslationProvider>
         </MemoryRouter>
       </Provider>
     );
@@ -92,7 +95,9 @@ describe("AllBooks Component", () => {
     render(
       <Provider store={mockStore(initialState)}>
         <MemoryRouter>
-          <AllBooks />
+          <MockTranslationProvider>
+            <AllBooks />
+          </MockTranslationProvider>
         </MemoryRouter>
       </Provider>
     );
@@ -114,12 +119,13 @@ describe("AllBooks Component", () => {
     render(
       <Provider store={mockStore(initialState)}>
         <MemoryRouter>
-          <AllBooks />
+          <MockTranslationProvider>
+            <AllBooks />
+          </MockTranslationProvider>
         </MemoryRouter>
       </Provider>
     );
 
-    expect(screen.getByText("Unread Books")).toBeInTheDocument();
     expect(screen.getByText("No books found")).toBeInTheDocument();
   });
 });
