@@ -16,12 +16,14 @@ import { useDispatch } from "react-redux";
 import { toggleReadStatus } from "../store";
 import { Edit } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { useTranslationContext } from "../context/TranslationContext";
 
 const BookCard = ({ book }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslationContext();
 
   const handleDialogOpen = () => {
     setDialogOpen(true);
@@ -108,19 +110,19 @@ const BookCard = ({ book }) => {
       </Card>
 
       <Dialog open={dialogOpen} onClose={handleDialogClose}>
-        <DialogTitle>Book Information</DialogTitle>
+        <DialogTitle>{t.bookInformation}</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
-            <strong>Title:</strong> {selectedBook?.title}
+            <strong>{t.title}</strong> {selectedBook?.title}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            <strong>Author:</strong> {selectedBook?.author}
+            <strong>{t.author}</strong> {selectedBook?.author}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            <strong>Price:</strong> {selectedBook?.price}
+            <strong>{t.price}</strong> {selectedBook?.price}
           </Typography>
           <Typography variant="body1">
-            <strong>Status:</strong> {selectedBook?.read ? "Read" : "Unread"}
+            <strong>{t.status}</strong> {selectedBook?.read ? "Read" : "Unread"}
           </Typography>
         </DialogContent>
         <DialogActions>
@@ -130,7 +132,7 @@ const BookCard = ({ book }) => {
             color="primary"
             variant="contained"
           >
-            Close
+            {t.close}
           </Button>
         </DialogActions>
       </Dialog>

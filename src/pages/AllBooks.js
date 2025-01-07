@@ -4,15 +4,18 @@ import { useSearchParams } from "react-router-dom";
 import { Box, Typography, List } from "@mui/material";
 import { Grid } from "@mui/material";
 import BookCard from "../components/BookCard";
+import { useTranslationContext } from "../context/TranslationContext";
+import { invariants } from "../constants/invariants";
 
 const AllBooks = () => {
   const [searchParams] = useSearchParams();
   const filter = searchParams?.get("filter");
   const books = useSelector((state) => state?.books);
+  const { t } = useTranslationContext();
 
   const filteredBooks = (books?.books || [])?.filter((book) => {
-    if (filter === "read") return book?.read;
-    if (filter === "unread") return !book?.read;
+    if (filter === invariants.read) return book?.read;
+    if (filter === invariants.unread) return !book?.read;
     return true;
   });
 
@@ -31,11 +34,11 @@ const AllBooks = () => {
           textAlign: "center",
         }}
       >
-        {filter === "read"
-          ? "Read Books"
-          : filter === "unread"
-          ? "Unread Books"
-          : "All Books"}
+        {filter === invariants.read
+          ? t.readBooks
+          : filter === invariants.unread
+          ? t.unreadBooks
+          : t.allBooks}
       </Typography>
       <List>
         <Grid container spacing={4}>
@@ -47,7 +50,6 @@ const AllBooks = () => {
               sm={6}
               md={4}
               paddingLeft={"16px !important"}
-              id="gridder"
             >
               <BookCard book={book} />
             </Grid>
@@ -60,7 +62,7 @@ const AllBooks = () => {
               marginTop: "16px",
             }}
           >
-            No books found
+            {t.noBooksFound}
           </Typography>
         )}
       </List>

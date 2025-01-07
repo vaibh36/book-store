@@ -16,7 +16,7 @@ const NavButtons = () => {
         color="secondary"
         data-testid="all"
       >
-        All Books
+        {t.allBooks}
       </NavButton>
       <NavButton
         to="/books?filter=read"
@@ -24,7 +24,7 @@ const NavButtons = () => {
         color="success"
         data-testid="read__books"
       >
-        Read Books
+        {t.readBooks}
       </NavButton>
       <NavButton
         to="/books?filter=unread"
@@ -32,7 +32,7 @@ const NavButtons = () => {
         color="warning"
         data-testid="unread__books"
       >
-        Unread Books
+        {t.unreadBooks}
       </NavButton>
     </Box>
   );

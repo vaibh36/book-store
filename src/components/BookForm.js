@@ -7,11 +7,13 @@ import { bookFormValidationSchema, bookInitialState } from "../utils/schema";
 import FormikTextField from "./FormikTextField";
 import { useLocation } from "react-router-dom";
 import isEmpty from "lodash.isempty";
+import { useTranslationContext } from "../context/TranslationContext";
 
 const BookForm = ({ book = {} }) => {
   const dispatch = useDispatch();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const location = useLocation();
+  const { t } = useTranslationContext();
   const {
     id = "",
     title = "",
@@ -76,14 +78,14 @@ const BookForm = ({ book = {} }) => {
               margin: "0 auto",
             }}
           >
-            <FormikTextField name="title" label="Book Title" />
-            <FormikTextField name="author" label="Author" />
-            <FormikTextField name="price" label="Price" />
+            <FormikTextField name="title" label={t.bookTitle} />
+            <FormikTextField name="author" label={t.authLabel} />
+            <FormikTextField name="price" label={t.priceLable} />
             <Button type="submit" variant="contained" color="primary">
-              {isEmpty(location?.state) ? "Add Book" : "Edit Book"}
+              {isEmpty(location?.state) ? t.addBook : t.editBook}
             </Button>
             <Button variant="contained" color="primary" onClick={resetForm}>
-              Reset
+              {t.reset}
             </Button>
           </Box>
           <Snackbar
@@ -93,7 +95,7 @@ const BookForm = ({ book = {} }) => {
             anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           >
             <Alert onClose={handleCloseSnackbar} severity="success">
-              Book added successfully!
+              {t.bookAdded}
             </Alert>
           </Snackbar>
         </Form>
