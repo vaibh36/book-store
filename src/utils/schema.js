@@ -5,7 +5,10 @@ export const bookFormValidationSchema = Yup.object({
     .min(10, "Title must be at least 10 characters")
     .required("Title is required"),
   author: Yup.string().required("Author is required"),
-  price: Yup.number().required("Price is required"),
+  price: Yup.number()
+    .typeError("Price must be a valid number")
+    .positive("Price must be a positive number")
+    .required("Price is required"),
 });
 
 export const bookInitialState = (book = {}) => {

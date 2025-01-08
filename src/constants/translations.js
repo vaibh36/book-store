@@ -21,5 +21,6 @@ export const translations = {
     bookTitle: "Book Title",
     authLabel: "Author",
     priceLable: "Price",
+    bookUpdated: "Book updated successfully",
   },
 };

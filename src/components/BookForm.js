@@ -47,12 +47,13 @@ const BookForm = () => {
     if (!isEmpty(location?.state)) {
       dispatch(
         editBook({
-          id,
+          id: location?.state?.id,
           title: values?.title,
           author: values?.author,
           price: values?.price,
         })
       );
+      setOpenSnackbar(true);
     }
   };
 
@@ -67,56 +68,58 @@ const BookForm = () => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ resetForm }) => (
-        <Form>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
-              maxWidth: 400,
-              margin: "0 auto",
-            }}
-          >
-            <FormikTextField
-              name="title"
-              label={t.bookTitle}
-              data-testid="title"
-            />
-            <FormikTextField
-              name="author"
-              label={t.authLabel}
-              data-testid="author"
-            />
-            <FormikTextField
-              name="price"
-              label={t.priceLable}
-              data-testid="price"
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              data-testid="add_book"
+      {({ resetForm }) => {
+        return (
+          <Form>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                maxWidth: 400,
+                margin: "0 auto",
+              }}
             >
-              {isEmpty(location?.state) ? t.addBook : t.editBook}
-            </Button>
-            <Button variant="contained" color="primary" onClick={resetForm}>
-              {t.reset}
-            </Button>
-          </Box>
-          <Snackbar
-            open={openSnackbar}
-            autoHideDuration={3000}
-            onClose={handleCloseSnackbar}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-          >
-            <Alert onClose={handleCloseSnackbar} severity="success">
-              {t.bookAdded}
-            </Alert>
-          </Snackbar>
-        </Form>
-      )}
+              <FormikTextField
+                name="title"
+                label={t.bookTitle}
+                data-testid="title"
+              />
+              <FormikTextField
+                name="author"
+                label={t.authLabel}
+                data-testid="author"
+              />
+              <FormikTextField
+                name="price"
+                label={t.priceLable}
+                data-testid="price"
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                data-testid="add_book"
+              >
+                {isEmpty(location?.state) ? t.addBook : t.editBook}
+              </Button>
+              <Button variant="contained" color="primary" onClick={resetForm}>
+                {t.reset}
+              </Button>
+            </Box>
+            <Snackbar
+              open={openSnackbar}
+              autoHideDuration={3000}
+              onClose={handleCloseSnackbar}
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            >
+              <Alert onClose={handleCloseSnackbar} severity="success">
+                {isEmpty(location?.state) ? t.bookAdded : t.bookUpdated}
+              </Alert>
+            </Snackbar>
+          </Form>
+        );
+      }}
     </Formik>
   );
 };

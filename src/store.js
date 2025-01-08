@@ -24,7 +24,7 @@ export const booksSlice = createSlice({
 
       const index = state.books.findIndex((b) => b?.id === updatedBook.id);
       if (index !== -1) {
-        state.books[index] = updatedBook;
+        state.books[index] = { ...updatedBook };
       }
     },
   },
