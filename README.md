@@ -2,7 +2,7 @@
 
 ### Overview
 
-A simple Book Library application built using React, Material-UI, Redux, and React Router. Users can add books, view all books, and filter books by read/unread status. The app also supports theme toggling between light and dark modes and shows a toast notification when a book is added.
+A simple Book Library application built using React, Material-UI, Redux, and React Router. Users can add books, view all books, and filter books by read/unread status. The app also shows a toast notification when a book is added.
 
 ## Features
 
@@ -49,10 +49,14 @@ The following routes/pages are included in this application:
 ├── /public
 │ ├── index.html # The HTML page template
 ├── /src
-│ ├── /components # Contains React components like BookForm, AllBooks, etc.
+│ ├── /components # Contains React components like BookForm, BookCard, etc.
 │ ├── /store # Contains Redux actions, reducers, and store
 │ ├── /theme # Contains Material UI theme configuration
 │ ├── App.js # Main application component
 │ ├── index.js # Entry point for React app
 ├── package.json # NPM package dependencies and scripts
 └── README.md # This file
+
+## Test Screenshot
+
+![Test coverage](test__case___coverage.png)
