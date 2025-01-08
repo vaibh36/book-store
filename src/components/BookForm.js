@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 import isEmpty from "lodash.isempty";
 import { useTranslationContext } from "../context/TranslationContext";
 
-const BookForm = ({ book = {} }) => {
+const BookForm = () => {
   const dispatch = useDispatch();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const location = useLocation();

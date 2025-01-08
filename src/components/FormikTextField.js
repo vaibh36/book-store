@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormikContext, getIn } from "formik";
 import { TextField } from "@mui/material";
+import PropTypes from "prop-types";
 
 const FormikTextField = ({ name, label, ...props }) => {
   const { values, errors, touched, handleChange, handleBlur } =
@@ -23,6 +24,12 @@ const FormikTextField = ({ name, label, ...props }) => {
       {...props}
     />
   );
+};
+
+FormikTextField.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  props: PropTypes.object,
 };
 
 export default FormikTextField;

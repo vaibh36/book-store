@@ -17,6 +17,7 @@ import { toggleReadStatus } from "../store";
 import { Edit } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useTranslationContext } from "../context/TranslationContext";
+import PropTypes from "prop-types";
 
 const BookCard = ({ book }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -138,6 +139,16 @@ const BookCard = ({ book }) => {
       </Dialog>
     </>
   );
+};
+
+BookCard.propTypes = {
+  book: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    author: PropTypes.string,
+    price: PropTypes.string,
+    read: PropTypes.bool,
+  }).isRequired,
 };
 
 export default BookCard;
