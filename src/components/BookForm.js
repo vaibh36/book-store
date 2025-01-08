@@ -14,12 +14,7 @@ const BookForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const location = useLocation();
   const { t } = useTranslationContext();
-  const {
-    id = "",
-    title = "",
-    author = "",
-    price = "",
-  } = location?.state || {};
+  const { title = "", author = "", price = "" } = location?.state || {};
 
   const initialState = {
     author,
